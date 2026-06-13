@@ -1,7 +1,7 @@
 <template>
     <div class="song">
         <div class="hero">
-            <img :src="img" />
+            <img :src="img" alt="Cover Art" />
             <div class="info">
                 <p class="title">{{ title }}</p>
                 <p class="artist">{{ artist }}</p>
@@ -23,7 +23,8 @@
 .hero > img {
     width: 6rem;
     height: 6rem;
-    border-radius: 1rem;
+    /* border-radius: 1rem; */
+    box-shadow: 0 0 8px 8px white inset;
 }
 .info > p {
     margin: 0;

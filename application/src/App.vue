@@ -16,6 +16,11 @@ html, body {
   color: white;
   /* background-color: #333; */
   overflow: hidden;
+  
+  font-family: 'MyCustomFont';
+  src: url('/fonts/NotoSans/NotoSans-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 </style>
 
