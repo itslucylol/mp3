@@ -29,18 +29,10 @@
 <script>
 export default {
     emits: ['select'],
+    props: ['items'],
     data() {
         return {
             selected: 0,
-            items: [
-                { name: "Now playing", more: true },
-                { name: "Music", more: true },
-                { name: "Photos", more: true },
-                { name: "Videos", more: true },
-                { name: "Extras", more: true },
-                { name: "Settings", more: true },
-                { name: "Shuffle Songs", more: false },
-            ]
         }
     },
     mounted() {

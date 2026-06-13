@@ -17,7 +17,7 @@ html, body {
   color: white;
   overflow: hidden;
   
-  font-family: 'MyCustomFont';
+  font-family: 'Noto Sans';
   src: url('/fonts/NotoSans/NotoSans-Medium.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
