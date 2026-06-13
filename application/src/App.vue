@@ -1,7 +1,7 @@
 <template>
   <Layout :view="view">
     
-    <Home v-if="view === 'Home'"></Home>
+    <Home v-if="view === 'Home'" @select="homepage_selection" />
     <Song v-if="view === 'Music'" img="/sample/Foreigner-head-games-79.jpg" title="Head Games" artist="Foreigner" album="Head Games"></Song>
 
   </Layout>
@@ -15,7 +15,6 @@
 
 html, body {
   color: white;
-  /* background-color: #333; */
   overflow: hidden;
   
   font-family: 'MyCustomFont';
@@ -35,6 +34,12 @@ export default {
   data() {
     return {
       view: "Home"
+    }
+  },
+  methods: {
+    homepage_selection(selection) {
+      console.log(selection);
+      // this.view = selection;
     }
   }
 }

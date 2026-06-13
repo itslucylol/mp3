@@ -79,8 +79,8 @@
 </style>
 
 <script setup>
-import Wallpaper from '../../components/Wallpaper.vue';
-import Icon from '../../components/Icon.vue';
+import Wallpaper from '@/components/Wallpaper.vue';
+import Icon from '@/components/Icon.vue';
 </script>
 
 <script>
