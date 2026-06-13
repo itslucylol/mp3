@@ -1,12 +1,22 @@
 <template>
     <div class="song">
         <div class="hero">
-            <img :src="img" alt="Cover Art" />
+            <img class="hero-image" :src="img" alt="Cover Art" />
             <div class="info">
                 <p class="title">{{ title }}</p>
                 <p class="artist">{{ artist }}</p>
                 <p class="album">{{ album }}</p>
             </div>
+        </div>
+        <div class="progress-content progress-content-top">
+            <span>{{ currentTime }}</span>
+            <span class="progress-content-spacer"></span>
+            <span>{{ totalTime }}</span>
+        </div>
+        <progress class="progress" />
+        <div class="progress-content progress-content-bottom">
+            <Icon class="audio-device-icon" name="headphones" size="20x20" />
+            <span class="audio-device">Lucy's Headphones</span>
         </div>
         <fullscreen_blur :img="img" />
     </div>
@@ -18,34 +28,69 @@
 }
 .hero {
     display: flex;
-    gap: 1rem;
 }
-.hero > img {
+.hero-image {
     width: 6rem;
     height: 6rem;
-    /* border-radius: 1rem; */
-    box-shadow: 0 0 8px 8px white inset;
+    border-radius: 1rem;
+}
+
+.info {
+    margin-left: 1rem;
 }
 .info > p {
     margin: 0;
     margin-bottom: 0.5rem;
     padding: 0;
 }
-
 .info > .artist {
     opacity: 75%;
+    font-size: 0.8rem;
 }
 .info > .album {
     opacity: 50%;
+    font-size: 0.8rem;
+}
+
+.progress {
+    width: 100%;
+}
+.progress-content {
+    display: flex;
+}
+.progress-content-top {
+    transform: translateY(0.75rem);
+}
+.progress-content-bottom {
+    margin-top: 1rem;
+}
+.progress-content-spacer {
+    margin: auto;
+}
+
+.audio-device {
+    margin-left: 0.5rem;
+    opacity: 75%;
+    font-size: 0.8rem;
+}
+.audio-device-icon {
+    opacity: 75%;
 }
 </style>
 
 <script setup>
 import fullscreen_blur from './fullscreen_blur.vue';
+import Icon from '../Icon.vue';
 </script>
 
 <script>
 export default {
-    props: ['img', 'title', 'artist', 'album']
+    props: ['img', 'title', 'artist', 'album'],
+    data() {
+        return {
+            currentTime: "0:00",
+            totalTime: "0:00",
+        }
+    }
 }
 </script>

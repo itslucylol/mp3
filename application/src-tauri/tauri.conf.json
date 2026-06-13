@@ -15,7 +15,9 @@
         "title": "mp3",
         "width": 320,
         "height": 240,
-        "resizable": false
+        "resizable": false,
+        "decorations": false,
+        "transparent": false
       }
     ],
     "security": {
