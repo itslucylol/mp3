@@ -26,7 +26,7 @@ html, body {
 </style>
 
 <script>
-import Layout from './components/Layout.vue';
+import Layout from './layouts/default.vue';
 import Home from './pages/home/index.vue';
 import Song from './pages/song/index.vue';
 

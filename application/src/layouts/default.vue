@@ -32,5 +32,5 @@ export default {
 </script>
 
 <script setup>
-import Icon from './Icon.vue';
+import Icon from '../components/Icon.vue';
 </script>
