@@ -18,7 +18,7 @@
             <Icon class="audio-device-icon" name="headphones" size="20x20" />
             <span class="audio-device">Lucy's Headphones</span>
         </div>
-        <fullscreen_blur :img="img" />
+        <Wallpaper :img="img" />
     </div>
 </template>
 
@@ -79,8 +79,8 @@
 </style>
 
 <script setup>
-import fullscreen_blur from './fullscreen_blur.vue';
-import Icon from '../Icon.vue';
+import Wallpaper from '../../components/Wallpaper.vue';
+import Icon from '../../components/Icon.vue';
 </script>
 
 <script>

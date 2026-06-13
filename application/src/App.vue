@@ -1,6 +1,7 @@
 <template>
   <Layout :view="view">
     
+    <Home v-if="view === 'Home'"></Home>
     <Song v-if="view === 'Music'" img="/sample/Foreigner-head-games-79.jpg" title="Head Games" artist="Foreigner" album="Head Games"></Song>
 
   </Layout>
@@ -26,13 +27,14 @@ html, body {
 
 <script>
 import Layout from './components/Layout.vue';
-import Song from './components/song/index.vue';
+import Home from './pages/home/index.vue';
+import Song from './pages/song/index.vue';
 
 export default {
-  components: { Layout, Song },
+  components: { Layout, Song, Home },
   data() {
     return {
-      view: "Music"
+      view: "Home"
     }
   }
 }

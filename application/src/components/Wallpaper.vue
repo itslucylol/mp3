@@ -1,7 +1,7 @@
 <template>
     <div class="fsb">
         <div></div>
-        <img :src="img" />
+        <img :src="img || '/sample/wallpaper.jpg'" />
     </div>
 </template>
 
