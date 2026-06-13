@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import IPodClassic from './components/IPodClassic.vue';
-
+import Layout from './components/Layout.vue';
 </script>
 
 <template>
-  <main>
-    <IPodClassic />
-  </main>
+  <Layout>
+    <p>Test</p>
+  </Layout>
 </template>
 
