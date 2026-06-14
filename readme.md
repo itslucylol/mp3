@@ -5,7 +5,8 @@ Please help me come up with a name for this project. You will get a shoutout in 
 
 ### Core
 - ✅ Core application under 200mb memory
-- 🚚 Basic menu system (In progress)
+- ✅ Basic menu system (In progress)
+- ✅ Browse library file structure
 - ❌ Play songs
 - ❌ Shuffle songs
 - ❌ Display pictures
