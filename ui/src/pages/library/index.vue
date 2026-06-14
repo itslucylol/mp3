@@ -1,5 +1,6 @@
 <template>
     <div>
+        <span>{{ path }}</span>
         <Menu :items="menu_options" @select="menu_select"></Menu>
         <Wallpaper />
     </div>
@@ -12,6 +13,7 @@ import Menu from '@/components/Menu.vue';
 
 <script>
 export default {
+    emits: ['goto'],
     data() {
         return {
             path: undefined,
@@ -19,13 +21,19 @@ export default {
         }
     },
     methods: {
-        menu_select(option) {
+        async menu_select(option) {
             const is_dir = option.item.more;
-            if (is_dir) {
-                this.load_directory(`${this.path}/${option.item.name}`);
-            } else {
-                window.open(`/api/library/file?path=${this.path}${option.item.name}`, '_blank');
-            }
+            if (is_dir) return this.load_directory(`${this.path}/${option.item.name}`);
+            //---   Songs   ---//
+            const file_path = this.path +'/'+ option.item.name;
+            await fetch('/api/play', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ file: file_path }),
+            });
+            this.$emit('goto', 'Now playing');
         },
 
         build_menu(directories, files) {

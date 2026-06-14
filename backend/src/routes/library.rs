@@ -4,7 +4,7 @@ use serde_json::{json, Value};
 use std::fs;
 use std::path::{ Path, PathBuf, Component };
 
-const LIBRARY_ROOT: &str = "./library";
+use crate::LIBRARY_ROOT;
 const REQUIRED_FOLDERS: [&str; 3] = ["Music", "Photos", "Videos"];
 
 fn ensure_root_structure() {

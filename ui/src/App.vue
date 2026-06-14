@@ -4,7 +4,7 @@
     <Home v-if="view === 'Home'" @goto="homepage_selection" />
     <Song v-if="view === 'Now playing'" img="/sample/Foreigner-head-games-79.jpg" title="Head Games" artist="Foreigner" album="Head Games"></Song>
 
-    <Library v-if="view === 'Library'" />
+    <Library v-if="view === 'Library'" @goto="homepage_selection" />
     <Music v-if="view === 'Music'" />
     <Photos v-if="view === 'Photos'" />
     <Videos v-if="view === 'Videos'" />
