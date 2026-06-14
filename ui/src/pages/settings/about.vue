@@ -91,7 +91,9 @@ export default {
   },
   async mounted() {
     try {
-      // const data = await invoke('info');
+      const response = await fetch('/api/info');
+      const data = await response.json();
+      console.log(data);
 
       this.version     = data.version;
       this.platform    = data.platform;
