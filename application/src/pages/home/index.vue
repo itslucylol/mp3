@@ -12,23 +12,27 @@ import Menu from '@/components/Menu.vue';
 
 <script>
 export default {
-    emits: ['select'],
+    emits: ['goto'],
     data() {
         return {
             items: [
-                { name: "Now playing", more: true },
-                { name: "Music", more: true },
-                { name: "Photos", more: true },
-                { name: "Videos", more: true },
-                { name: "Extras", more: true },
-                { name: "Settings", more: true },
-                { name: "Shuffle Songs", more: false },
+                { name: "Now playing",   more: true  },
+                { name: "Music",         more: true  },
+                { name: "Photos",        more: true  },
+                { name: "Videos",        more: true  },
+                { name: "Extras",        more: true  },
+                { name: "Settings",      more: true  },
+                { name: "Shuffle songs", more: false },
             ]
         }
     },
     methods: {
         passSelect(payload) {
-            this.$emit('select', payload);
+            const name = payload.item.name;
+            if (name === 'Shuffle songs') {
+            } else {
+                this.$emit('goto', name);
+            }
         }
     }
 }
