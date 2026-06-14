@@ -5,15 +5,15 @@
       <div class="about-content">
         <div class="info-row">
           <span class="label">Version:</span>
-          <span class="value">v0.1.0</span>
+          <span class="value">{{ version }}</span>
         </div>
         <div class="info-row">
           <span class="label">Platform:</span>
-          <span class="value">x86_64-amd64</span>
+          <span class="value">{{ platform }}</span>
         </div>
         <div class="info-row">
-          <span class="label">Storage:</span>
-          <span class="value">14.2 GB / 16 GB</span>
+          <span class="label">Storage (Used/Max):</span>
+          <span class="value">{{ storageUsed }} / {{ storageMax }}</span>
         </div>
       </div>
   
@@ -78,3 +78,32 @@
     margin: 0;
   }
   </style>
+
+<script>
+import { invoke } from '@tauri-apps/api/core';
+
+export default {
+  data() {
+    return {
+      version: "...",
+      platform: "...",
+      storageUsed: "...",
+      storageMax: "...",
+    }
+  },
+  async mounted() {
+    try {
+      const data = await invoke('info');
+
+      this.version     = data.version;
+      this.platform    = data.platform;
+      this.storageUsed = data.storageUsed;
+      this.storageMax  = data.storageMax;
+    } catch (error) {
+      console.error("Failed to fetch Tauri system info:", error);
+      this.version = "Unknown";
+      this.platform = "Unknown";
+    }
+  }
+}
+</script>
