@@ -12,4 +12,15 @@ export default defineConfig(async () => ({
   },
   base: '/', 
   clearScreen: false,
+
+  server: {
+    proxy: {
+      // When hitting /api in dev, Vite forwards it to the
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 }));

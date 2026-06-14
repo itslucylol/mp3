@@ -1,25 +1,15 @@
 use std::process::Command;
-use serde::Serialize;
+use axum::{http::StatusCode, Json};
 
-#[derive(Serialize)]
-pub struct InfoPayload {
-    version: String,
-    platform: String,
-    #[serde(rename = "storageUsed")]
-    storage_used: String,
-    #[serde(rename = "storageMax")]
-    storage_max: String,
-}
-
-#[tauri::command]
-pub fn info() -> Result<InfoPayload, String> {
+pub async fn main() -> Result<Json<serde_json::Value>, StatusCode> {
     let output = Command::new("df")
         .args(["-h", "/"])
         .output()
-        .map_err(|e| e.to_string())?;
+        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
+    // If the command exits with a non-zero code, return an HTTP 500 error
     if !output.status.success() {
-        return Err("Failed to execute df command".into());
+        return Err(StatusCode::INTERNAL_SERVER_ERROR);
     }
 
     let stdout = String::from_utf8_lossy(&output.stdout);
@@ -36,10 +26,11 @@ pub fn info() -> Result<InfoPayload, String> {
         ("Unknown".into(), "Unknown".into())
     };
 
-    Ok(InfoPayload {
-        version: env!("CARGO_PKG_VERSION").to_string(),
-        platform: std::env::consts::ARCH.to_string(),
-        storage_used: used,
-        storage_max: max,
-    })
+    // Return successful information.
+    return Ok(Json(serde_json::json!({
+        "version": env!("CARGO_PKG_VERSION").to_string(),
+        "platform": std::env::consts::ARCH.to_string(),
+        "storageUsed": used,
+        "storageMax": max,
+    })));
 }

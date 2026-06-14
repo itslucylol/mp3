@@ -1,3 +1,7 @@
+pub mod routes;
+
+mod axum;
+
 fn main() {
-    println!("Hello, world!");
+    axum::main();
 }
