@@ -6,7 +6,8 @@ use crate::routes;
 #[tokio::main]
 pub async fn main() {
     let api_router = Router::new()
-        .route("/info", get(routes::info::main));
+        .route("/info", get(routes::info::main))
+        .route("/library", get(routes::library::main));
 
 
     let serve_dir = ServeDir::new("public");

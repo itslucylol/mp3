@@ -1,7 +1,8 @@
 use std::process::Command;
 use axum::{http::StatusCode, Json};
+use serde_json::{ json, Value };
 
-pub async fn main() -> Result<Json<serde_json::Value>, StatusCode> {
+pub async fn main() -> Result<Json<Value>, StatusCode> {
     let output = Command::new("df")
         .args(["-h", "/"])
         .output()
@@ -27,7 +28,7 @@ pub async fn main() -> Result<Json<serde_json::Value>, StatusCode> {
     };
 
     // Return successful information.
-    return Ok(Json(serde_json::json!({
+    return Ok(Json(json!({
         "version": env!("CARGO_PKG_VERSION").to_string(),
         "platform": std::env::consts::ARCH.to_string(),
         "storageUsed": used,
