@@ -80,8 +80,6 @@
   </style>
 
 <script>
-import { invoke } from '@tauri-apps/api/core';
-
 export default {
   data() {
     return {
@@ -93,14 +91,14 @@ export default {
   },
   async mounted() {
     try {
-      const data = await invoke('info');
+      // const data = await invoke('info');
 
       this.version     = data.version;
       this.platform    = data.platform;
       this.storageUsed = data.storageUsed;
       this.storageMax  = data.storageMax;
     } catch (error) {
-      console.error("Failed to fetch Tauri system info:", error);
+      console.error("Failed to fetch system info:", error);
       this.version = "Unknown";
       this.platform = "Unknown";
     }
