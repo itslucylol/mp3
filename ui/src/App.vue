@@ -4,6 +4,7 @@
     <Home v-if="view === 'Home'" @goto="homepage_selection" />
     <Song v-if="view === 'Now playing'" img="/sample/Foreigner-head-games-79.jpg" title="Head Games" artist="Foreigner" album="Head Games"></Song>
 
+    <Library v-if="view === 'Library'" />
     <Music v-if="view === 'Music'" />
     <Photos v-if="view === 'Photos'" />
     <Videos v-if="view === 'Videos'" />
@@ -35,6 +36,7 @@ import Layout from './layouts/default.vue';
 import Home from './pages/home/index.vue';
 import Song from './pages/song/index.vue';
 
+import Library from './pages/library/index.vue';
 import Music from './pages/music/index.vue';
 import Photos from './pages/photos/index.vue';
 import Videos from './pages/videos/index.vue';

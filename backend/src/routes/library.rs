@@ -2,7 +2,7 @@ use axum::{extract::Query, http::StatusCode, Json};
 use serde::Deserialize;
 use serde_json::{json, Value};
 use std::fs;
-use std::path::{ Path, PathBuf };
+use std::path::{ Path, PathBuf, Component };
 
 const LIBRARY_ROOT: &str = "./library";
 const REQUIRED_FOLDERS: [&str; 3] = ["Music", "Photos", "Videos"];
@@ -23,15 +23,24 @@ pub async fn main(Query(params): Query<LibraryQuery>) -> Result<Json<Value>, Sta
 
     ensure_root_structure();
 
-    let target_path = match &params.path {
-        Some(sub_path) => {
-            if sub_path.contains("..") { // Basic security: Do not allow path traversal tricks like ".."
-                return Err(StatusCode::BAD_REQUEST);
+    //---   Build Target Path (Within Library Folder)   ---//
+    let mut target_path = PathBuf::from(LIBRARY_ROOT);
+    if let Some(sub_path) = &params.path {
+        let user_path = Path::new(sub_path); // Create a Path from the input string
+        for component in user_path.components() { // Iterate through the user string to sanitize it
+            match component {
+                // Ignore absolute roots (like /) or prefixes (like C:) to prevent absolute paths
+                Component::RootDir | Component::Prefix(_) => continue,
+                
+                // Ignore parents (..) so users can't climb out of the folder
+                Component::ParentDir => continue,
+                
+                // Normal files/directories and current dir (.) are perfectly safe
+                Component::Normal(c) => target_path.push(c),
+                Component::CurDir => continue,
             }
-            Path::new(LIBRARY_ROOT).join(sub_path)
         }
-        None => PathBuf::from(LIBRARY_ROOT), // Default to root if no path given
-    };
+    }
 
     let entries = fs::read_dir(&target_path).map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
