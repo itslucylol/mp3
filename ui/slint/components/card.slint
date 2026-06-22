@@ -7,14 +7,14 @@ export component CustomCard inherits Rectangle {
 
     background: Theme.base-100;
     border-radius: 8px;
-    padding: Theme.space-lg;
 
     VerticalLayout {
         spacing: Theme.space-sm;
+        padding: Theme.space-lg;
         
         Text {
             text: root.title;
-            font-size: 18px;
+            font-size: Theme.space-lg;
             font-weight: 700;
         }
 
