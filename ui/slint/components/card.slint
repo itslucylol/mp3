@@ -1,0 +1,25 @@
+import { Theme } from "../theme.slint";
+
+export component CustomCard inherits Rectangle {
+    // Vue "Props" equivalent
+    in property <string> title: "Default Title";
+    in property <bool> highlight: false;
+
+    background: Theme.base-100;
+    border-radius: 8px;
+    padding: Theme.space-lg;
+
+    VerticalLayout {
+        spacing: Theme.space-sm;
+        
+        Text {
+            text: root.title;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        // Vue "Slot" equivalent: We expose a layout container 
+        // where content can be dynamically injected when used.
+        @children
+    }
+}
