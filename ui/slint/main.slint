@@ -1,41 +1,32 @@
 import { Theme } from "theme.slint";
-import { Button } from "std-widgets.slint";
-import { CustomCard } from "components/card.slint";
+import { AppLayout } from "layouts/default.slint";
 
 export component MainWindow inherits Window {
+    title: "MP3 Player";
     width: 400px;
-    height: 300px;
-    
-    // Define a dynamic property for the text
-    in property <string> my_text: "Hello, Slint!";
+    height: 600px;
+    background: Theme.base-100;
 
-    VerticalLayout {
-        alignment: center;
-        spacing: 20px;
+    // Expose these properties so main.rs can easily see and modify them
+    in property <string> current-time <=> layout.time-string;
+    in property <int> battery-level <=> layout.battery-level;
+    in property <string> bluetooth-status <=> layout.bluetooth-status;
+    in property <string> current-view <=> layout.view;
 
-        CustomCard {
-            title: "Card One";
-            highlight: false;
+    layout := AppLayout {
+        // Vue Prop Assignment
+        view: "Now Playing"; 
+
+        // Anything put here fills out the @children slot!
+        VerticalLayout {
+            padding: Theme.space-md;
+            alignment: center;
             
-            Text { text: "This is body text injected into the card."; }
-        }
-
-        Text {
-            text: root.my_text;
-            color: Theme.primary;
-            font-size: 24px;
-            horizontal-alignment: center;
-        }
-
-        Button {
-            text: "Click Me";
-            clicked => {
-                // Call the custom Rust callback
-                root.button_clicked();
+            Text {
+                text: "Your MP3 Player Content Goes Here";
+                horizontal-alignment: center;
+                color: Theme.base-content;
             }
         }
     }
-    
-    // Define the signal that Rust will listen to
-    pure callback button_clicked();
 }
