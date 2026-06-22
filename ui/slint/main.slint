@@ -1,0 +1,31 @@
+import { Button } from "std-widgets.slint";
+
+export component MainWindow inherits Window {
+    width: 400px;
+    height: 300px;
+    
+    // Define a dynamic property for the text
+    in property <string> my_text: "Hello, Slint!";
+
+    VerticalLayout {
+        alignment: center;
+        spacing: 20px;
+
+        Text {
+            text: root.my_text;
+            font-size: 24px;
+            horizontal-alignment: center;
+        }
+
+        Button {
+            text: "Click Me";
+            clicked => {
+                // Call the custom Rust callback
+                root.button_clicked();
+            }
+        }
+    }
+    
+    // Define the signal that Rust will listen to
+    pure callback button_clicked();
+}
